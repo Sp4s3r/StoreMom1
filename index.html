@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Precios de Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Consulta de Productos - Tienda Fabian</h1>
+    </header>
+    <main>
+        <input type="text" id="searchInput" placeholder="Buscar producto...">
+        <button id="searchButton">Buscar</button>
+        <div id="resultsContainer">
+            <table id="productsTable">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody id="productsBody">
+                    <!-- Aquí se agregarán dinámicamente los productos -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>© Tienda Fabian - 2024</p>
+    </footer>
+
+    <script>
+        // Ejemplo de productos
+        var products = [
+            { name: "Arroz (1kg)", price: 4.50 },
+            { name: "Arroz costeño", price: 5.00 },
+            { name: "Azucar (1kg)", price: 4.50 },
+            { name: "Huevo (1kg)", price: 9.20 },
+            { name: "Leche Gloria (otro colores)", price: 4.50 },
+            { name: "Leche Gloria (azul)", price: 4.00 },
+            { name: "Avena Santa Catalina", price: 2.50 },
+            { name: "Avena 3 ositos verde", price: 4.00 },
+            { name: "Avena Abuelo 60gr", price: 1.20 },
+            { name: "Avena Abuelo 135gr", price: 2.50 },
+            { name: "Avena Abuelo 300gr", price: 6.00 },
+            { name: "Aceite Primor", price: 12.50 },
+            { name: "Aceite Alsol", price: 9.50 },
+            { name: "Aceite Mirasol", price: 8.50 },
+            { name: "Atun Filete - cualquiera", price: 6.00 },
+            { name: "Atun Trozos - cualquiera", price: 5.50 },
+            { name: "Atun Iquenita", price: 4.00 },
+            { name: "Nescafe 50gr hermetico", price: 8.00 },
+            { name: "Eco lata grande", price: 15.00 },
+            { name: "Eco lata pequeño", price: 6.00 },
+            { name: "Sillao grande", price: 4.50 },
+            { name: "Sillao mediano", price: 1.80 },
+            { name: "Sillao chico", price: 1.50 },
+            { name: "Inka Kola 3L", price: 12.50 },
+            { name: "Inka Kola 2.5L", price: 10.00 },
+            { name: "Inka Kola 1.5L", price: 7.50 },
+            { name: "Inka Kola 1.5L vidrio", price: 6.50 },
+            { name: "Inka Kola personal", price: 3.20 },
+            { name: "Cola Kola 3L", price: 12.50 },
+            { name: "Cola Kola 2.5L", price: 10.00 },
+            { name: "Cola Kola 1.5L", price: 7.50 },
+            { name: "Cola Kola personal", price: 3.20 },
+            { name: "Fanta 3L", price: 8.50 },
+            { name: "Fanta personal", price: 2.50 },
+            { name: "Sprite 3L", price: 8.50 },
+            { name: "Sprite personal", price: 2.50 },
+            { name: "Cola Kola 1.5L vidrio", price: 6.50 },
+            { name: "Frugos 1.5L", price: 6.50 },
+            { name: "Noble (negro4)", price: 8.00 },
+            { name: "Suave (4)", price: 4.50 },
+            { name: "Elite (4)", price: 4.50 },
+            { name: "Suave (2)", price: 2.00 },
+            { name: "Papel Toalla", price: 3.50 },
+            { name: "Marsella (450gr)", price: 5.50 },
+            { name: "Marsella (750gr)", price: 8.80 },
+            { name: "Ariel (450 gr)", price: 7.00 },
+            { name: "Ace (450 gr)", price: 7.00 },
+            { name: "Ace (450 gr)", price: 7.00 },
+            { name: "Pilas AA", price: 7.00 },
+            { name: "Pilas AAA", price: 7.00 },
+            { name: "", price: 7.00 },
+            { name: "", price: 7.00 },
+            { name: "", price: 7.00 },
+        ];
+
+        // Función para mostrar los productos en la tabla
+        function displayProducts(productsToShow) {
+            var tbody = document.getElementById('productsBody');
+            tbody.innerHTML = '';
+            productsToShow.forEach(function(product) {
+                var row = document.createElement('tr');
+                var productNameCell = document.createElement('td');
+                productNameCell.textContent = product.name;
+                var priceCell = document.createElement('td');
+                priceCell.textContent = 'S/' + product.price.toFixed(2);
+                row.appendChild(productNameCell);
+                row.appendChild(priceCell);
+                tbody.appendChild(row);
+            });
+        }
+
+        // Mostrar todos los productos al cargar la página
+        window.addEventListener('load', function() {
+            displayProducts(products);
+        });
+
+        // Función para realizar la búsqueda y mostrar los resultados
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+            var results = products.filter(function(product) {
+                return product.name.toLowerCase().includes(searchQuery);
+            });
+            displayProducts(results);
+        });
+    </script>
+
+</body>
+</html>
